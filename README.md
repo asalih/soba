@@ -1,2 +1,2 @@
 # SoBa
-reaching a socket tbalancer
+reaching a socket balancer
