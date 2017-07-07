@@ -1,0 +1,9 @@
+{
+  "name": "cluster.test",
+  "version": "0.0.0",
+  "description": "cluster.test",
+  "main": "app.js",
+  "author": {
+    "name": "asalih"
+  }
+}
