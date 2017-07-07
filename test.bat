@@ -1,3 +1,4 @@
+START node balancer.js
 SET SID=1
 START node server.js
 SET SID=2
