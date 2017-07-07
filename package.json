@@ -1,8 +1,8 @@
 {
-  "name": "cluster.test",
+  "name": "balancer-soba",
   "version": "0.0.0",
-  "description": "cluster.test",
-  "main": "app.js",
+  "description": "balancer-soba",
+  "main": "balancer.js",
   "author": {
     "name": "asalih"
   }
