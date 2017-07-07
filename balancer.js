@@ -1,7 +1,14 @@
 ﻿var net = require("net");
 
+/**
+ * predefined consts
+ * client-example.js connects to "clientport"
+ * server-example.js connects to "serverPort"
+ * inactivity for a client defined with "clientTimeout"
+ */
 const serverPort = 1557;
 const clientPort = 1447;
+const clientTimeout = 5000;
 
 var servers = [];
 var request = 0;
@@ -30,6 +37,7 @@ var server = net.createServer(function (socket) {
     });
     socket.on('close', function () {
         console.log('Connection closed');
+        delete clients[socket.name];
     });
     socket.on("error", function (err) {
         if (err && err.code != "ECONNRESET")
@@ -38,7 +46,7 @@ var server = net.createServer(function (socket) {
     socket.on("timeout", function (obj) {
         delete clients[socket.name];
     });
-    socket.setTimeout(5000);
+    socket.setTimeout(clientTimeout);
 });
 
 server.listen(clientPort);
