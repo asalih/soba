@@ -1,9 +1,10 @@
 var net = require("net");
 
-var servers = [];
-var request = 0;
+
 module.exports = (() => {
     this.balanceServer = {};
+    var servers = [];
+    var request = 0;
     var passRequest = (server, data, client) => {
         var socket = new net.Socket();
         socket.connect(server.port, server.ip, function () {
@@ -20,6 +21,10 @@ module.exports = (() => {
                 var server = servers[(request++) % servers.length];
                 passRequest(server, incoming, client);
             });
+            client.on("error", function (err) {
+                if (err && err.code != "ECONNRESET")
+                    throw err;
+            });
             client.setTimeout(options.clientTimeout);
         });
 
@@ -27,5 +32,4 @@ module.exports = (() => {
     };
 
     return this;
-})();
-
+});
