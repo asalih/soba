@@ -4,7 +4,7 @@ var servers = [];
 var request = 0;
 module.exports = (() => {
     this.balanceServer = {};
-    var passRequest = function (server, data, client) {
+    var passRequest = (server, data, client) => {
         var socket = new net.Socket();
         socket.connect(server.port, server.ip, function () {
             socket.write(data);
@@ -13,7 +13,7 @@ module.exports = (() => {
             client.write(data.toString());
         });
     };
-    this.start = function(options) {
+    this.start = (options) => {
         servers = options.servers;
         this.balanceServer = net.createServer(function (client) {
             client.on('data', function (incoming) {
