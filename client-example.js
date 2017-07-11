@@ -1,23 +1,18 @@
-﻿var net = require("net");
-
-//client connects to the balancer
-
-var client = new net.Socket();
-
-client.connect(1447, "127.0.0.1", function () {
-    console.log('Connected');
-});
-
-client.on('data', function (data) {
-    console.log(data.toString());
-});
-
-client.on('close', function () {
-    console.log('Connection closed');
-});
+﻿var http = require("http");
 
 var rnd = Math.random();
+setInterval(() => {
+    http.get("http://localhost:1447", function (res) {
+        res.setEncoding('utf8');
+        let rawData = '';
+        res.on('data', (chunk) => rawData += chunk);
+        res.on('end', () => {
+            try {
 
-setInterval(function () {
-    client.write("client: " + rnd);
-}, 1000 * rnd);
+                console.log(rawData);
+            } catch (e) {
+                console.log(e.message);
+            }
+        });
+    });
+}, 1000*rnd);
